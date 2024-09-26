@@ -1,6 +1,24 @@
 import React from "react";
+import  { useState, useEffect } from "react";
 
-const Counter = ({count}) => {
+const Counter = () => {
+    
+    const [count, setCount] = useState(0);
+ 
+    useEffect(() => {
+       
+        const interval = setInterval(() => {
+            setCount(count + 1);
+        }, 1000);
+ 
+    
+        return () => clearInterval(interval);
+    }, [count]);
+
+    const resetCount = () => {
+        setCount(0)
+    } 
+
     
 
     return ( 
@@ -23,6 +41,7 @@ const Counter = ({count}) => {
                 This is my counter
             </h3>
             <h1>{count}</h1>
+            <button onClick={resetCount} className="btn btn-primary">Reset Count</button>
         </div>
      );
 }
